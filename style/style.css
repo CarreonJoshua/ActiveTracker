@@ -1,0 +1,86 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #c9f5ee;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight:bold;
+  text-decoration:unset;
+}
+li a:hover {
+  background-color: #8ceaed;
+}
+li a:hover.active {
+  background-color: #8ceaed;
+}
+.active{
+  background-color:	#8ceaed;
+}
+
+table {
+	border-collapse: collapse;
+  	border-spacing: 0;
+  	width: 100%;
+  	border: 1px solid #ddd;
+}
+th {
+	background-color: #94ffea;
+	border:1px solid;
+	padding:8px;
+	font-size:17px;
+}
+td {
+	border:1px solid;
+	padding:8px;
+	font-size:15px;
+}
+.button {
+	background-color:#b8dfe0;
+	color:black;
+	border:1px solid;
+}
+.button:hover {
+	background-color:#97dbde;
+}
+.flex-container {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+
+}
+.flexbox {
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	margin:10px;	
+
+}
+//* GEROME DID THIS *//
+.mightybond {
+	background-color: white;
+	justify-content:center;
+	align-items:center;
+	display:flex;
+	flex-direction: column;
+}
+body{
+	background-color:#ebfaf8
+}
+tr:nth-child(even){
+	background-color: #c9f0e8
+}
+tr:nth-child(odd){
+	background-color: #cdfaf1
+}
