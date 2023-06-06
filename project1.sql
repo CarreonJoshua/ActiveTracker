@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2023 at 03:42 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Generation Time: Jun 06, 2023 at 09:35 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,19 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `activity` (
   `activityNum` int(10) NOT NULL,
+  `subjectCode` int(5) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
   `instruction` text DEFAULT NULL,
   `totalscore` int(3) DEFAULT NULL,
   `date_given` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `activity`
 --
 
-INSERT INTO `activity` (`activityNum`, `name`, `instruction`, `totalscore`, `date_given`) VALUES
-(3001, 'Activity 1', 'Create an ERD Diagram', 50, '2023-05-28 06:41:24'),
-(3002, 'Lab Act 1', 'Create a Tkinter with CRUD utilities', 100, '2023-05-28 06:45:48');
+INSERT INTO `activity` (`activityNum`, `subjectCode`, `name`, `instruction`, `totalscore`, `date_given`) VALUES
+(3001, 1, 'Activity 1', 'Create an ERD Diagram', 50, '2023-06-06 07:20:46'),
+(3002, 1, 'Lab Act 1', 'Create a Tkinter with CRUD utilities', 100, '2023-06-06 07:20:46');
 
 -- --------------------------------------------------------
 
@@ -55,7 +56,7 @@ CREATE TABLE `contact` (
   `phoneNum` varchar(20) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `contact`
@@ -76,7 +77,7 @@ CREATE TABLE `course` (
   `courseID` int(10) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `description` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `course`
@@ -96,7 +97,7 @@ CREATE TABLE `section` (
   `sectionID` int(10) NOT NULL,
   `section_code` varchar(10) DEFAULT NULL,
   `courseid` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `section`
@@ -115,7 +116,7 @@ INSERT INTO `section` (`sectionID`, `section_code`, `courseid`) VALUES
 CREATE TABLE `status` (
   `statusID` tinyint(1) NOT NULL,
   `label` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `status`
@@ -137,7 +138,7 @@ CREATE TABLE `students` (
   `lastName` varchar(25) DEFAULT NULL,
   `section` int(10) DEFAULT NULL,
   `gender` varchar(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `students`
@@ -147,6 +148,26 @@ INSERT INTO `students` (`studID`, `firstName`, `lastName`, `section`, `gender`) 
 (111, 'Joshua', 'Carreon', 3211, 'male'),
 (112, 'Gerome', 'Quilestino', 3211, 'male'),
 (113, 'Jethro', 'Norris', 3211, 'male');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject`
+--
+
+CREATE TABLE `subject` (
+  `subjectCode` int(5) NOT NULL,
+  `subName` varchar(20) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `sectionID` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`subjectCode`, `subName`, `description`, `sectionID`) VALUES
+(1, 'IT221', 'Information Management', 3211);
 
 -- --------------------------------------------------------
 
@@ -161,7 +182,7 @@ CREATE TABLE `submission` (
   `dateSubmitted` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` tinyint(1) DEFAULT NULL,
   `score` int(3) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `submission`
@@ -182,7 +203,8 @@ INSERT INTO `submission` (`submitID`, `studentID`, `activityNum`, `dateSubmitted
 -- Indexes for table `activity`
 --
 ALTER TABLE `activity`
-  ADD PRIMARY KEY (`activityNum`);
+  ADD PRIMARY KEY (`activityNum`),
+  ADD KEY `subjectCode` (`subjectCode`);
 
 --
 -- Indexes for table `contact`
@@ -218,6 +240,13 @@ ALTER TABLE `students`
   ADD KEY `section` (`section`);
 
 --
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`subjectCode`),
+  ADD KEY `sectionID` (`sectionID`);
+
+--
 -- Indexes for table `submission`
 --
 ALTER TABLE `submission`
@@ -234,7 +263,7 @@ ALTER TABLE `submission`
 -- AUTO_INCREMENT for table `activity`
 --
 ALTER TABLE `activity`
-  MODIFY `activityNum` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3003;
+  MODIFY `activityNum` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3004;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -271,6 +300,12 @@ ALTER TABLE `submission`
 --
 
 --
+-- Constraints for table `activity`
+--
+ALTER TABLE `activity`
+  ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`subjectCode`) REFERENCES `subject` (`subjectCode`);
+
+--
 -- Constraints for table `contact`
 --
 ALTER TABLE `contact`
@@ -287,6 +322,12 @@ ALTER TABLE `section`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`section`) REFERENCES `section` (`sectionID`);
+
+--
+-- Constraints for table `subject`
+--
+ALTER TABLE `subject`
+  ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`sectionID`) REFERENCES `section` (`sectionID`);
 
 --
 -- Constraints for table `submission`

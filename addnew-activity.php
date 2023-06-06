@@ -45,6 +45,7 @@ if(isset($_POST['submit'])) {
 		  <thead>
 		    <tr>
 		    	<th>Activity Num</th>
+		    	<th>Subject Code</th>
 		      	<th>Activity Name</th>
 		      	<th>Description</th>
 		      	<th>Total Score</th>
@@ -55,12 +56,13 @@ if(isset($_POST['submit'])) {
 		  <tbody>
 		  		<?php
 		  		include "connection.php";
-		  		$sql = "SELECT * FROM `activity`";
+		  		$sql = "SELECT activityNum, activity.subjectCode, subject.subjectCode, name, subName, instruction, totalscore, date_given FROM activity LEFT JOIN subject ON activity.subjectCode = subject.subjectCode;";
 		  		$result = mysqli_query($conn, $sql);
 		  		while ($row = mysqli_fetch_assoc($result)) {
 		  			?>
 		  			<tr>
 				      <td><?php echo $row['activityNum'] ?></td>
+				      <td><?php echo $row['subName'] ?></td>
 				      <td><?php echo $row['name'] ?></td>
 				      <td><?php echo $row['instruction'] ?></td>
 				      <td><?php echo $row['totalscore'] ?></td>
