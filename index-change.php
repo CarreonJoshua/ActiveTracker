@@ -29,7 +29,8 @@ if(isset($_POST['submit'])) {
   		<li><a class="active" href="index-change.php">Submissions</a></li>
   		<li><a href="addnew-student.php">Students</a></li>
   		<li><a href="addnew-activity.php">Activities</a></li>
-  		<li><a href="addnew-section.php">Sections</a></li>
+  		<li><a href="addnew-section.php">Sections & Subjects</a></li>
+  		<li><a href="searchbar.php">Search...</a></li>
   		</center>
 	</ul>
 	<div class="flex-container">

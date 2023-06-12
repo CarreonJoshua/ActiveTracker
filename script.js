@@ -8,3 +8,7 @@ function recStud(){
 function recAct(){
 	window.location.href="addnew-activity.php"
 }
+//function for the search engine
+function searchReturn(){
+	window.location.href="searchbar.php"
+}

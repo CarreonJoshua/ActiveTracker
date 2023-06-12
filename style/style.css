@@ -75,6 +75,10 @@ td {
 	display:flex;
 	flex-direction: column;
 }
+.container {
+	display: inline-block;
+	direction: rtl;
+}
 body{
 	background-color:#ebfaf8
 }

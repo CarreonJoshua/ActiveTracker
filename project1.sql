@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2023 at 09:35 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Jun 12, 2023 at 04:20 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,7 +34,7 @@ CREATE TABLE `activity` (
   `instruction` text DEFAULT NULL,
   `totalscore` int(3) DEFAULT NULL,
   `date_given` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `activity`
@@ -56,7 +56,7 @@ CREATE TABLE `contact` (
   `phoneNum` varchar(20) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact`
@@ -77,7 +77,7 @@ CREATE TABLE `course` (
   `courseID` int(10) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `description` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `course`
@@ -97,7 +97,7 @@ CREATE TABLE `section` (
   `sectionID` int(10) NOT NULL,
   `section_code` varchar(10) DEFAULT NULL,
   `courseid` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `section`
@@ -116,7 +116,7 @@ INSERT INTO `section` (`sectionID`, `section_code`, `courseid`) VALUES
 CREATE TABLE `status` (
   `statusID` tinyint(1) NOT NULL,
   `label` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `status`
@@ -138,7 +138,7 @@ CREATE TABLE `students` (
   `lastName` varchar(25) DEFAULT NULL,
   `section` int(10) DEFAULT NULL,
   `gender` varchar(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `students`
@@ -160,14 +160,15 @@ CREATE TABLE `subject` (
   `subName` varchar(20) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `sectionID` int(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `subject`
 --
 
 INSERT INTO `subject` (`subjectCode`, `subName`, `description`, `sectionID`) VALUES
-(1, 'IT221', 'Information Management', 3211);
+(1, 'IT221', 'Information Management', 3211),
+(2, 'IT222', 'Networking', 3211);
 
 -- --------------------------------------------------------
 
@@ -182,7 +183,7 @@ CREATE TABLE `submission` (
   `dateSubmitted` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `status` tinyint(1) DEFAULT NULL,
   `score` int(3) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `submission`

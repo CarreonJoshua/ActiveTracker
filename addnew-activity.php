@@ -2,11 +2,12 @@
 include "connection.php";
 if(isset($_POST['submit'])) {
 	$activityNum= $_POST['activity'];
+	$subject = $_POST['subjectFor'];
 	$name = $_POST['name'];
 	$description = $_POST['description'];
 	$totalscore = $_POST['totalscore'];
 
-	$sql = "INSERT INTO activity(activityNum, name, instruction, totalscore) VALUES ('$activityNum', '$name', '$description', '$totalscore')";
+	$sql = "INSERT INTO activity(activityNum, subjectCode, name, instruction, totalscore) VALUES ('$activityNum', '$subject', '$name', '$description', '$totalscore')";
 	$result = mysqli_query($conn, $sql);
 	if($result) {
 		echo "Success!";
@@ -28,7 +29,8 @@ if(isset($_POST['submit'])) {
   		<li><a href="index-change.php">Submissions</a></li>
   		<li><a href="addnew-student.php">Students</a></li>
   		<li><a class="active" href="addnew-activity.php">Activities</a></li>
-  		<li><a href="addnew-section.php">Sections</a></li>
+  		<li><a href="addnew-section.php">Sections & Subjects</a></li>
+  		<li><a href="searchbar.php">Search...</a></li>
   		</center>
 	</ul>
 	<div class="flex-container">
@@ -91,6 +93,14 @@ if(isset($_POST['submit'])) {
 							</td>
 							<td>
 								<input type="text" class="form-control" name="activity">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label class="label">Subject Code</label>
+							</td>
+							<td>
+								<input type="text" class="form-control" name="subjectFor">
 							</td>
 						</tr>
 						<tr>
