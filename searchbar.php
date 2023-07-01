@@ -232,15 +232,17 @@
 		}
 		document.cookie = "table"
 		function search(){
+			//Defining the search values
 			var table = document.getElementById('table').value.trim();
 			var column = document.getElementById('column').value.trim();
 			var value = document.getElementById('value').value.trim();
 			var others = document.getElementById('other').value.trim();
+			//these turn the search values into arrays. the spaces separate the different keys into array items
 			var tableSplit = table.split(' ')
 			var columnSplit = column.split(' ')
 			var valueSplit = value.split(' ')
 			var othersSplit = others.split(' ')
-			//setting the table values
+			//setting the table name
 			if(table !== ''){
 				if(tableSplit.length >= 2){
 					i = 0
@@ -252,7 +254,7 @@
 					document.cookie = "0 = " + table;
 				}
 			}
-			//setting the column
+			//setting the column name
 			if(column !== ''){
 				if(columnSplit.length >= 2){
 					j = 10
@@ -266,6 +268,7 @@
 					document.cookie = "10 = " + column;
 				}
 			}
+			//setting the values used
 			if(value !== ''){
 				if(valueSplit.length >= 2){
 					j=20
@@ -280,6 +283,7 @@
 					document.cookie = "20 = " + value;
 				}
 			}
+			//setting the following other parameters
 			if(others !== ''){
 				if(othersSplit.length >= 2){
 					j = 30
